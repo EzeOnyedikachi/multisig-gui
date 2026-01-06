@@ -1,0 +1,15 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# AUC data files (do NOT upload raw experimental data)
+*.ip1
+*.ip2
+temp_upload.ip
+
+# Environment / OS
+.env
+.DS_Store
