@@ -1520,6 +1520,17 @@ elif section == "Reports":
                 )
             else:
                 st.warning("⚠️ Rotor speed is 0 or missing. Cannot convert Sigma to kDa.")
+            # --- GUARD: ensure legacy values are provided before validation ---
+            legacy_ref = st.session_state.get("multisig_reference", {})
+            
+            required_keys = ["Mn_kDa", "Mw_kDa", "Mz_kDa", "E"]
+            missing = [k for k in required_keys if legacy_ref.get(k, 0) == 0]
+            
+            if missing:
+                st.info(
+                    "Enter legacy MULTISIG values (σ or converted kDa) to enable numerical validation."
+                )
+                st.stop()
 
             # Build Comparison Table
             val_df = build_numerical_validation_table(results, st.session_state["multisig_reference"])
