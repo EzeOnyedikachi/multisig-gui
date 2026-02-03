@@ -1437,12 +1437,12 @@ elif section == "Reports":
                     return 0.0
                 
                 # M (g/mol) = (sigma * R * T) / ((1 - vbar*rho) * omega^2)
-                M_gmol = (sigma * R_erg * temp_k) / (buoyancy * omega**2)
+                M_gmol = (2.0 * sigma * R_erg * temp_k) / (buoyancy * omega**2)
                 
                 return M_gmol / 1000.0  # Convert to kDa
 
             
-                # --- STEP 2A: Resolve RPM explicitly for validation ---
+            # --- STEP 2A: Resolve RPM explicitly for validation ---
             dataset_name = label_state  # e.g. "IgG1.IP1"
             
             if dataset_name in VALIDATION_RPM:
