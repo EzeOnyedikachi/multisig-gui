@@ -11,6 +11,9 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.info("✅ app.py started")
 # --- Optional PDF support ---
 try:
     from reportlab.lib.pagesizes import letter
