@@ -905,7 +905,7 @@ if section == "Overview":
                 results["r_ref"],
             )
             ax_fit.set_title("Experimental data vs MultiSig fit")
-            st.pyplot(fig_fit, use_container_width=True)
+            st.pyplot(fig_fit, width="stretch")
             st.markdown("</div>", unsafe_allow_html=True)
     
             # PNG download for static overlay
@@ -966,7 +966,7 @@ if section == "Overview":
                     yaxis_title="Fringe",
                 )
     
-                st.plotly_chart(fig_int_overlay, use_container_width=True)
+                st.plotly_chart(fig_int_overlay, width="stretch")
 
             # Save overlay for PDF export
             buf_overlay = io.BytesIO()
@@ -1015,7 +1015,7 @@ if section == "Overview":
             st.markdown('<div class="plot-card">', unsafe_allow_html=True)
             fig_coeffs, ax_coeffs = msf.plot_coeffs(coef_table, x_axis=x_axis)
             ax_coeffs.set_title("Coefficient mean ± SD")
-            st.pyplot(fig_coeffs, use_container_width=True)
+            st.pyplot(fig_coeffs, width="stretch")
             st.markdown("</div>", unsafe_allow_html=True)
 
             # Save coefficient plot for PNG download
@@ -1054,7 +1054,7 @@ if section == "Overview":
                     margin=dict(l=0, r=0, t=30, b=0),
                 )
             
-                st.plotly_chart(fig_int_coeff, use_container_width=True)
+                st.plotly_chart(fig_int_coeff, width="stretch")
 
             # Save coefficient plot for PDF export
             buf_coeff = io.BytesIO()
@@ -1096,7 +1096,7 @@ if section == "Overview":
             ax_res.set_xlabel("Radius (cm)")
             ax_res.set_ylabel("Residual (J_obs - J_fit)")
             ax_res.set_title("Residuals vs radius")
-            st.pyplot(fig_res, use_container_width=True)
+            st.pyplot(fig_res, width="stretch")
             st.markdown("</div>", unsafe_allow_html=True)
     
             # --- Interactive residuals plot (Plotly) ---
@@ -1130,7 +1130,7 @@ if section == "Overview":
                     margin=dict(l=0, r=0, t=30, b=0),
                 )
             
-                st.plotly_chart(fig_int_res, use_container_width=True)
+                st.plotly_chart(fig_int_res, width="stretch")
     
                 # Save residual plot for PDF export
                 buf_resid = io.BytesIO()
@@ -1187,7 +1187,7 @@ elif section == "Analysis":
             ax_raw.set_ylabel("Fringe")
             ax_raw.set_title("Trimmed SE profile used for MultiSig fit")
             ax_raw.legend()
-            st.pyplot(fig_raw, use_container_width=True)
+            st.pyplot(fig_raw, width="stretch")
             st.markdown("</div>", unsafe_allow_html=True)
 
         # Tab 2
@@ -1212,7 +1212,7 @@ elif section == "Analysis":
             ax_model.set_xlabel("Radius (cm)")
             ax_model.set_ylabel("Fringe")
             ax_model.legend()
-            st.pyplot(fig_model, use_container_width=True)
+            st.pyplot(fig_model, width="stretch")
             st.markdown("</div>", unsafe_allow_html=True)
 
         # Tab 3
@@ -1230,7 +1230,7 @@ elif section == "Analysis":
                 ]
                 st.dataframe(
                     coef_table[display_cols],
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True,
                 )
                 st.caption("Mass bins are derived using the σ→M mapping from your Methods chapter.")
@@ -1281,12 +1281,12 @@ elif section == "Datasets":
 
         with data_col:
             st.markdown('<span class="pill-tab">Data preview</span>', unsafe_allow_html=True)
-            st.dataframe(df_raw.head(12), use_container_width=True)
+            st.dataframe(df_raw.head(12), width="stretch")
 
         st.markdown("")
         st.markdown('<span class="pill-tab">Basic stats</span>', unsafe_allow_html=True)
         stats = df_raw.describe().T
-        st.dataframe(stats, use_container_width=True)
+        st.dataframe(stats, width="stretch")
 
 # ========================================================
 # SECTION: REPORTS
@@ -1334,7 +1334,7 @@ elif section == "Reports":
 
             if mw_diag is not None:
                 st.markdown("##### Precision across repeated fits")
-                st.dataframe(mw_diag, use_container_width=True, hide_index=True)
+                st.dataframe(mw_diag,width="stretch", hide_index=True)
                 st.caption(
                     "95% confidence intervals assume approximate normality of the mass estimates "
                     "across repeated jittered fits."
@@ -1351,7 +1351,7 @@ elif section == "Reports":
             if species_df is None:
                 st.info("Coefficient table was not available – cannot build species summary.")
             else:
-                st.dataframe(species_df, use_container_width=True, hide_index=True)
+                st.dataframe(species_df,width="stretch", hide_index=True)
                 st.caption(
                     "Fractions are based on the fitted MultiSig coefficients. For a clean single-species "
                     "sample, you typically expect one dominant bin (≈90%+ of the signal)."
@@ -1529,7 +1529,7 @@ elif section == "Reports":
                 for col in ["This GUI", "MULTISIG", "Abs. diff", "% diff"]:
                     show[col] = show[col].map(lambda v: f"{v:.4f}" if (isinstance(v, (int, float, np.floating)) and np.isfinite(v)) else "—")
                 
-                st.dataframe(show, use_container_width=True, hide_index=True)
+                st.dataframe(show, width="stretch", hide_index=True)
 
                 # Validation status
                 pct = pd.to_numeric(val_df["% diff"], errors="coerce").abs()
@@ -1612,7 +1612,7 @@ elif section == "Reports":
                         "Abs. diff": "{:.4f}",
                         "% diff": "{:.4f}",
                     }),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True,
                 )
         
