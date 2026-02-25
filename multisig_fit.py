@@ -25,7 +25,7 @@ def sigma_bins_array(sigma_ref: float = 1.0, n_bins: int = 17) -> np.ndarray:
 
     sigma_ref is a dimensionless scaling reference (not itself in 1/cm^2).
     """
-    return np.array([ sigma_ref * (1.15 ** i) for i in range(n_bins)], dtype=float)
+    return np.array([ sigma_ref * (1.05 ** i) for i in range(n_bins)], dtype=float)
 
 
 def predict_J(r, c_mean, E, sigma_bins, J_ref, r_ref):
