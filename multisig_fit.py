@@ -125,7 +125,7 @@ def sigma_to_mass_gmol(sigma_cm_inv2, *, rpm, temp_c, v_ml_per_g, rho_g_per_ml):
         raise ValueError("1 - v̄·ρ must be > 0 for physical conversion.")
 
     # Factor 2.0 matches the σ definition used in this MultiSig model.
-    K = (2.0 * R_erg * T) / (denom * omega ** 2)  # g/mol per (1/cm^2)
+    K = (R_erg * T) / (denom * omega ** 2)  # g/mol per (1/cm^2)
 
     sigma = np.asarray(sigma_cm_inv2, dtype=float)
     return K * sigma
