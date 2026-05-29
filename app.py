@@ -52,6 +52,46 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# 1. ADD SHU LOGO TO SIDEBAR
+try:
+    # Attempt to load the logo (ensure 'shu_logo.png' is in the same folder)
+    # Note: Using width='stretch' to avoid the warning you saw in your logs!
+    st.sidebar.image("shu_logo.png", use_container_width=True)
+except Exception:
+    st.sidebar.markdown("### Sheffield Hallam University") # Fallback if image is missing
+st.sidebar.markdown("---")
+
+# 2. ADD LICENSING POP-UP (Streamlit Dialog)
+
+@st.dialog("Licensing & Citation Agreement")
+def show_license():
+    st.warning("Please acknowledge the licensing terms before using the software.")
+    st.markdown("""
+
+    ### License
+
+    This software is provided under the **GNU GPL v3 License**.
+
+    ### Citation
+
+    If you use this software in academic work, please cite:
+
+    > *Placeholder citation until publication*
+
+    ### Disclaimer
+    This software is provided for research purposes only.
+    """)
+    if st.button("I Agree and Continue"):
+        st.session_state.license_agreed = True
+        st.rerun()
+
+# Check if the user has already agreed during this session
+if "license_agreed" not in st.session_state:
+    st.session_state.license_agreed = False
+
+if not st.session_state.license_agreed:
+    show_license()
+    st.stop()
 
 # --------------------------------------------------------
 # Utility: load an SE .ip1 / .ip2 file from path or upload
